@@ -185,38 +185,36 @@ figure{
 /* Верхня лінія
 ---------------------------------------------------*/
 #Main_line{	
-	max-width:100%;
-	margin-top: 1%;
-	margin-left: 5%;
-	margin-right: 5%;
-}
-figure.main_line{
-    border-radius: 4px;
-    padding-top: 12.5%;
-    background: -moz-radial-gradient(center, ellipse cover,  rgba(128,28,0,0.9) 15%, rgba(66,8,0,0.9) 100%); /* FF3.6+ */
+	border-radius: 8px;
+    position: absolute;
+    top: 20px;
+    width: 1140px;
+    left: 50%;
+    height: 155px;
+    margin-left: -570px;
+       background: -moz-radial-gradient(center, ellipse cover,  rgba(128,28,0,0.9) 15%, rgba(66,8,0,0.9) 100%); /* FF3.6+ */
     background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(15%,rgba(128,28,0,0.9)), color-stop(100%,rgba(66,8,0,0.9))); /* Chrome,Safari4+ */
     background: -webkit-radial-gradient(center, ellipse cover,  rgba(128,28,0,0.9) 15%,rgba(66,8,0,0.9) 100%); /* Chrome10+,Safari5.1+ */
     background: -o-radial-gradient(center, ellipse cover,  rgba(128,28,0,0.9) 15%,rgba(66,8,0,0.9) 100%); /* Opera 12+ */
     background: -ms-radial-gradient(center, ellipse cover,  rgba(128,28,0,0.9) 15%,rgba(66,8,0,0.9) 100%); /* IE10+ */
     background: radial-gradient(ellipse at center,  rgba(128,28,0,0.9) 15%,rgba(66,8,0,0.9) 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#801c00', endColorstr='#420800',GradientType=1 );
-
 }
 
 
-#Logo{
-	max-width: 100%;
+
+#Logo
+{
+    position:absolute;
+    width: 510px;
+    height:155px;
 	margin-left: 5%;
 	margin-right: 54.60%;
-}
-figure.logo_image{
-	margin-top: -30%;	
-	padding-top: 30.39%;
+	top: 50px;	
+
     background-image: url('../images/logo.png');
-    background-size: cover;
-    -moz-background-size: cover;  /* Firefox 3.6 */
-    background-position: center;  /* Internet Explorer 7/8 */
 }
+
 /* Пошук
 -------------------------------------------------*/
 #Search{
