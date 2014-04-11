@@ -1,0 +1,73 @@
+﻿@model Dictionary<int, int>
+
+@{
+    ViewBag.Title = string.Format("Корзина | {0}", NewVersionLampstore.Constants.TITLE);
+    Layout = "~/Views/Shared/_ProductPage.cshtml";
+    
+}
+
+<p  id="breadcrumbs">
+    @Html.ActionLink("На головну", "Index", "Home")
+    @NewVersionLampstore.Constants.BREADCRUMBS_SEPARATOR
+    Корзина
+</p>
+
+<div id="Cart">
+<h3>Корзина</h3>
+
+@if (Model == null || Model.Count == 0)
+{
+    @:Корзина порожня
+}
+else
+{
+    decimal price = 0;
+    
+    <table id="Cart_table">
+    @foreach (var key in Model.Keys)
+    {
+        NewVersionLampstore.Models.Product product = new NewVersionLampstore.Service.ProductEntityService().Get(key);
+        NewVersionLampstore.Models.Product prod = product;
+        price += product.Price.HasValue ? product.Price.Value * Model[key] : 0;
+        var productName = @product.Manufacturer.Name + " "+@product.Name;
+        
+        <tr>
+        <td><img  src="@Url.Content("~/Content")/@(NewVersionLampstore.Constants.PRODUCT_IMAGES_FOLDER)/Mini/@prod.ID@prod.ImageExt.TrimEnd()?@DateTime.Now" alt="@prod.Manufacturer.Name "+"@prod.Name" /></td>
+            <td>@Html.ActionLink(productName, "Details", "Product", new { id= product.ID},null)</td>
+            </tr>
+        <tr>
+            <td>
+            @using (Html.BeginForm("ChangeValue", "Cart", FormMethod.Post))
+            {
+                @Html.TextBox("number", Model[key], new { style = "width:30px" })
+                @Html.Hidden("id", key)
+                <input type="submit" value="Змінити Кількість" />
+            }
+            </td>
+            <td>  @(product.Price.HasValue ? product.Price.Value * Model[key] : 0) грн.</td>
+            <td>
+            @using (Html.BeginForm("Delete", "Cart", FormMethod.Post, new { onsubmit = "javascript:return confirm('Вы уверены?');" }))
+            {
+                @Html.Hidden("id", key)
+                <input type="submit" value="Видалити" />
+            }
+            </td>
+        </tr>
+    }
+ 
+    
+    <tr>
+        <td style="padding-top:20px; font-weight:bold;">Загально:</td>
+        <td>&nbsp;</td>
+        <td style="padding-top:20px; font-weight:bold;">  @price грн.</td>
+        <td>&nbsp;</td>
+    </tr>
+    </table>
+
+      
+    }
+     </div>
+    @Html.ActionLink("Оформити замовлення", "ShipInform", "Cart", new { @id= "order_button"})
+    @Html.BackLink("Index")
+  
+        

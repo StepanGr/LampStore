@@ -1,0 +1,52 @@
+D:\Dropbox\LampStore\NewVersionLampStore\NewVersionLampstore\NewVersionLampstore\bin\NewVersionLampstore.dll
+D:\Dropbox\LampStore\NewVersionLampStore\NewVersionLampstore\NewVersionLampstore\bin\NewVersionLampstore.pdb
+D:\Dropbox\LampStore\NewVersionLampStore\NewVersionLampstore\NewVersionLampstore\bin\EntityFramework.dll
+D:\Dropbox\LampStore\NewVersionLampStore\NewVersionLampstore\NewVersionLampstore\bin\EntityFramework.xml
+D:\Dropbox\LampStore\NewVersionLampStore\NewVersionLampstore\NewVersionLampstore\obj\Debug\NewVersionLampstore.dll
+D:\Dropbox\LampStore\NewVersionLampStore\NewVersionLampstore\NewVersionLampstore\obj\Debug\NewVersionLampstore.pdb
+D:\Dropbox\LampStore\NewVersionLampStore\NewVersionLampstore\NewVersionLampstore\bin\Ninject.dll
+D:\Dropbox\LampStore\NewVersionLampStore\NewVersionLampstore\NewVersionLampstore\bin\Ninject.pdb
+D:\Dropbox\LampStore\NewVersionLampStore\NewVersionLampstore\NewVersionLampstore\bin\Ninject.xml
+D:\Dropbox\LampStore\NewVersionLampStore\NewVersionLampstore\NewVersionLampstore\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Spektr\Dropbox\LampStore\NewVersionLampStore\NewVersionLampstore\NewVersionLampstore\bin\NewVersionLampstore.dll
+C:\Users\Spektr\Dropbox\LampStore\NewVersionLampStore\NewVersionLampstore\NewVersionLampstore\bin\NewVersionLampstore.pdb
+C:\Users\Spektr\Dropbox\LampStore\NewVersionLampStore\NewVersionLampstore\NewVersionLampstore\bin\EntityFramework.dll
+C:\Users\Spektr\Dropbox\LampStore\NewVersionLampStore\NewVersionLampstore\NewVersionLampstore\bin\Ninject.dll
+C:\Users\Spektr\Dropbox\LampStore\NewVersionLampStore\NewVersionLampstore\NewVersionLampstore\bin\EntityFramework.xml
+C:\Users\Spektr\Dropbox\LampStore\NewVersionLampStore\NewVersionLampstore\NewVersionLampstore\bin\Ninject.pdb
+C:\Users\Spektr\Dropbox\LampStore\NewVersionLampStore\NewVersionLampstore\NewVersionLampstore\bin\Ninject.xml
+C:\Users\Spektr\Dropbox\LampStore\NewVersionLampStore\NewVersionLampstore\NewVersionLampstore\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Spektr\Dropbox\LampStore\NewVersionLampStore\NewVersionLampstore\NewVersionLampstore\obj\Debug\NewVersionLampstore.dll
+C:\Users\Spektr\Dropbox\LampStore\NewVersionLampStore\NewVersionLampstore\NewVersionLampstore\obj\Debug\NewVersionLampstore.pdb
+C:\Users\Spektr\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\NewVersionLampstore.dll
+C:\Users\Spektr\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\NewVersionLampstore.pdb
+C:\Users\Spektr\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\EntityFramework.dll
+C:\Users\Spektr\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\Ninject.dll
+C:\Users\Spektr\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\EntityFramework.xml
+C:\Users\Spektr\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\Ninject.pdb
+C:\Users\Spektr\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\Ninject.xml
+C:\Users\Spektr\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Spektr\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\obj\Debug\NewVersionLampstore.dll
+C:\Users\Spektr\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\obj\Debug\NewVersionLampstore.pdb
+D:\Dropbox\LampStore (1)\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\NewVersionLampstore.dll
+D:\Dropbox\LampStore (1)\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\NewVersionLampstore.pdb
+D:\Dropbox\LampStore (1)\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\EntityFramework.dll
+D:\Dropbox\LampStore (1)\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\Ninject.dll
+D:\Dropbox\LampStore (1)\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\EntityFramework.xml
+D:\Dropbox\LampStore (1)\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\Ninject.pdb
+D:\Dropbox\LampStore (1)\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\Ninject.xml
+D:\Dropbox\LampStore (1)\TestLampstore\TestVersionLampstore\NewVersionLampstore\obj\Debug\NewVersionLampstore.csprojResolveAssemblyReference.cache
+D:\Dropbox\LampStore (1)\TestLampstore\TestVersionLampstore\NewVersionLampstore\obj\Debug\NewVersionLampstore.dll
+D:\Dropbox\LampStore (1)\TestLampstore\TestVersionLampstore\NewVersionLampstore\obj\Debug\NewVersionLampstore.pdb
+D:\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\NewVersionLampstore.dll
+D:\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\NewVersionLampstore.pdb
+D:\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\EntityFramework.dll
+D:\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\Ninject.dll
+D:\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\EntityFramework.xml
+D:\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\Ninject.pdb
+D:\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\Ninject.xml
+D:\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\obj\Debug\ResolveAssemblyReference.cache
+D:\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\obj\Debug\NewVersionLampstore.dll
+D:\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\obj\Debug\NewVersionLampstore.pdb
+C:\Users\Spektr\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\Glimpse.Core.dll
+D:\Dropbox\LampStore (1)\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\Glimpse.Core.dll

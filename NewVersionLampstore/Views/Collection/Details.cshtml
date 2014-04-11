@@ -1,0 +1,140 @@
+﻿@model NewVersionLampstore.Models.Collection
+           
+@{
+    ViewBag.Title = string.Format("{0} | {1}", Model.Name, NewVersionLampstore.Constants.TITLE);
+    Layout = "~/Views/Shared/_ProductPage.cshtml";
+}
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+
+<p id="breadcrumbs">
+    @Html.ActionLink("На головну", "Index", "Home")
+    @NewVersionLampstore.Constants.BREADCRUMBS_SEPARATOR
+    @Html.ActionLink(Model.Category.Name, "GetByShortName", "Category", new { shortname = Model.Category.ShortName }, null)
+    @NewVersionLampstore.Constants.BREADCRUMBS_SEPARATOR
+    @Model.Name
+</p>
+
+<h2>@Model.Name</h2>
+
+
+
+<p>@Model.Description</p>
+@if (Model.CollectionImages.Count > 0)
+{
+    ViewBag.LeftArrow = -1;
+    if (Model.CollectionImages.Count > NewVersionLampstore.Constants.COLLECTION_IMAGE_PREVIEW_COUNT) { ViewBag.RightArrow = 1; }
+    else { ViewBag.RightArrow = -1; }
+    ViewBag.CollectionID = Model.ID;
+    
+    <div id="CollectionImagePreview" style="width:100%; text-align:center;">
+        @Html.Partial("_CollectionImagePreview", Model.CollectionImages.OrderByDescending(item => item.Sequence).Take(NewVersionLampstore.Constants.COLLECTION_IMAGE_PREVIEW_COUNT))
+    </div>
+    <div id="CollectionImage" style="width:100%; text-align:center;">
+        @Html.Partial("_CollectionImage", Model.CollectionImages.OrderByDescending(item => item.Sequence).First())
+    </div>
+}
+@functions
+{
+    public string RowProducts(ref int index)
+    {
+        string strResult = "<tr>";
+        
+        for(int innerIndex=0; innerIndex<NewVersionLampstore.Constants.PRODUCT_NUMBER_IN_ROW; innerIndex++)
+        {
+            strResult += "<td style='text-align:center; padding-bottom:20px;'>";
+            
+            if(index < Model.CollectionProducts.Count)
+            {
+                var obj = Model.CollectionProducts.OrderByDescending(item => item.Sequence).Skip(index).Take(1).First();
+                string strImage = "0.jpg";
+                if (!string.IsNullOrWhiteSpace(obj.Product.ImageExt)) { strImage = obj.Product.ID.ToString() + obj.Product.ImageExt.TrimEnd() + "?" + DateTime.Now.ToString(); }
+                strResult += string.Format("<a href='{0}'><img src='{1}/{2}/{3}/{4}' alt='{5}' /></a>", Url.Action("GetProductInCollection", "Product", new { category = obj.Collection.Category.ShortName, collection = obj.Collection.ShortName, product = obj.Product.ShortName }), Url.Content("~/Content"), NewVersionLampstore.Constants.PRODUCT_IMAGES_FOLDER, NewVersionLampstore.Constants.PRODUCT_IMAGES_MINI_FOLDER, strImage, obj.Product.Name);
+                strResult += "<br />";
+
+                strResult += Html.ActionLink(obj.Product.Name, "GetProductInCollection", "Product", new { category = obj.Collection.Category.ShortName, collection = obj.Collection.ShortName, product = obj.Product.ShortName }, null);
+                
+                if(Request.IsAuthenticated && (User.IsInRole(NewVersionLampstore.Constants.ROLE_ADMIN)||User.IsInRole(NewVersionLampstore.Constants.ROLE_CONTENT_MANAGER)))
+                {
+                    strResult += "<br />";
+                    strResult += Html.ActionLink("<- Вверх", "Up", "CollectionProduct", new { id = obj.ID }, null);
+                    strResult += "&nbsp;&nbsp;&nbsp;";
+                    strResult += Html.ActionLink("Вниз ->", "Down", "CollectionProduct", new { id = obj.ID }, null);
+                }
+            }
+
+            strResult += "</td>";
+
+            index = index + 1;
+        }
+
+        strResult += "</tr>";
+
+        return strResult;
+    }
+}
+
+<table style="width:100%">
+@{
+    int iCollectionProductsCount = Model.CollectionProducts.Count;
+    int iCollectionProductIndex = 0;
+    
+    while(iCollectionProductIndex < iCollectionProductsCount)
+    {
+        @MvcHtmlString.Create(RowProducts(ref iCollectionProductIndex))
+    }
+}
+</table>
+
+@if (Request.IsAuthenticated && (User.IsInRole(NewVersionLampstore.Constants.ROLE_ADMIN) || User.IsInRole(NewVersionLampstore.Constants.ROLE_CONTENT_MANAGER)))
+{
+    <h2>Мини-изображения для списка</h2>
+    
+    using (Html.BeginForm("UploadCatalogImage", "Collection", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.Hidden("objID", Model.ID)
+
+    <table>
+        <tr>
+            <td>
+                @{
+        string filename = string.Empty;
+        if (string.IsNullOrWhiteSpace(Model.ImageExt)) { filename = "0.jpg"; }
+        else { filename = string.Format("{0}{1}?{2}", Model.ID, Model.ImageExt.TrimEnd(), DateTime.Now); }
+                }
+                <img src='@(Url.Content("~/Content"))/@(NewVersionLampstore.Constants.COLLECTION_MINI_IMAGES_FOLDER)/@(filename)' alt='@Model.Name' />
+            </td>
+            <td style="padding-left:20px">
+                <input type="file" name="imagefile" />
+                <br />
+                <input type="submit" value="Загрузить" />
+            </td>
+        </tr>
+    </table>
+    }
+    
+    <h2>Изображения для фотогалереи</h2>
+    
+    if (Model.CollectionImages.Count > 0)
+    {
+        <table>
+        @foreach (var image in Model.CollectionImages.OrderByDescending(item => item.Sequence))
+        {
+            <tr>
+                <td><img src="@(Url.Content("~/Content"))/@(NewVersionLampstore.Constants.COLLECTION_IMAGE_FOLDER)/@(NewVersionLampstore.Constants.COLLECTION_IMAGE_PREVIEW_FOLDER)/@image.ID@image.ImageExt" alt="@image.ID" /></td>
+                <td style="padding-left:20px">@Html.ActionLink("Вверх", "Up", "CollectionImage", new { id = image.ID }, null)</td>
+                <td style="padding-left:20px">@Html.ActionLink("Вниз", "Down", "CollectionImage", new { id = image.ID }, null)</td>
+                <td style="padding-left:20px">@Html.ActionLink("Видалити", "DeleteExpress", "CollectionImage", new { id = image.ID }, new { onclick = "javascript:return confirm('Are you sure?');" })</td>
+            </tr>
+        }
+        </table>
+    }
+    
+    <h2>Добавление изображения для фотогалереи</h2>
+    using (Html.BeginForm("Upload", "CollectionImage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.Hidden("CollectionID", Model.ID)
+        <input type="file" name="imagefile" />
+        @:   
+        <input type="submit" value="Загрузить" />
+    }
+}

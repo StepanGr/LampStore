@@ -1,0 +1,65 @@
+﻿@model NewVersionLampstore.Models.ShipInfo
+@{
+    ViewBag.Title = "ShipInform";
+    Layout = "~/Views/Shared/_ProductPage.cshtml";
+}
+<div id="breadcrumbs">
+    @Html.ActionLink("На головну", "Index", "Home")
+    @NewVersionLampstore.Constants.BREADCRUMBS_SEPARATOR
+    Оформлення замовлення
+</div>
+
+<div id="Check_inform">
+<h3 >Оформлення замовлення</h3>
+@using (Html.BeginForm("Save", "Cart", FormMethod.Post))
+{
+        
+     @Html.ValidationSummary()
+
+@Html.LabelFor(model => model.Name)
+<br />
+@Html.EditorFor(model => model.Name)
+<span style="color:Red">@Html.ValidationMessageFor(model => model.Name)</span>
+<br /><br />
+
+@Html.LabelFor(model => model.LastName)
+<br />
+@Html.EditorFor(model => model.LastName)
+<span style="color:Red">@Html.ValidationMessageFor(model => model.LastName)</span>
+<br /><br />
+
+@Html.LabelFor(model => model.Phone)
+<br />
+@Html.EditorFor(model => model.Phone)
+<span style="color:Red">@Html.ValidationMessageFor(model => model.Phone)</span>
+<br /><br />
+    
+@Html.LabelFor(model => model.Citi)
+<br />
+@Html.EditorFor(model => model.Citi)
+<span style="color:Red">@Html.ValidationMessageFor(model => model.Citi)</span>
+<br /><br />
+
+@Html.LabelFor(model => model.Email)
+<br />
+@Html.EditorFor(model => model.Email)
+<span style="color:Red">@Html.ValidationMessageFor(model => model.Email)</span>
+<br /><br />
+
+@Html.LabelFor(model => model.typePayment)
+<br />
+@Html.DropDownListFor(x => x.typePayment, new SelectList(new string[] { "Готівка", "Безготівковий" }), new { id = "TypePayment" })
+<span style="color:Red">@Html.ValidationMessageFor(model => model.Email)</span>
+<br /><br />
+    
+@Html.LabelFor(model => model.typePayment)
+<br />
+@Html.DropDownListFor(x => x.typePayment, new SelectList(new string[] { "Самовивіз", "Нова Пошта","Адресна Доставка(Нова пошта)"}), new { id = "TypePayment" })
+<span style="color:Red">@Html.ValidationMessageFor(model => model.Email)</span>
+<br /><br />
+   
+
+
+       <input id="confirm_button" type="submit" value="Оформити" />      
+}   
+ </div>        

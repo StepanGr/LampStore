@@ -1,0 +1,35 @@
+﻿@model IEnumerable<NewVersionLampstore.Models.ContentManager>
+
+@{
+    ViewBag.Title = string.Format("Контент-менеджери | {0}", NewVersionLampstore.Constants.TITLE);
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+
+<p>
+    @Html.ActionLink("На головну", "Index", "Home")
+    @NewVersionLampstore.Constants.BREADCRUMBS_SEPARATOR
+    Контент-менеджеры
+</p>
+
+<h2>Контент-менеджеры</h2>
+
+<p>@Html.ActionLink("Створити", "Create")</p>
+
+<table>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            
+            @item.FirstName
+           
+        </td>
+        <td style="padding-left:20px">
+            @item.Login
+        </td>
+        <td style="padding-left:20px">
+            @Html.ActionLink("Видалити", "Delete", new { username = item.Login }, new { onclick = "javascript:return confirm('Вы уверены?');" })
+        </td>
+    </tr>
+}
+</table>

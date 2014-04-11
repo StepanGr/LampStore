@@ -1,0 +1,28 @@
+﻿@model IEnumerable<NewVersionLampstore.Models.Category>
+
+@{
+   
+    ViewBag.Title = NewVersionLampstore.Constants.TITLE;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    } 
+
+    <h2>Категорії</h2>
+    <p>@Html.ActionLink("Створити Категорію", "Create", "Category")
+    &nbsp;&nbsp;&nbsp;
+        @Html.ActionLink("Створити колекцію", "Create", "Collection")
+        </p>
+
+
+
+
+@foreach (var item in Model)
+{
+    <table>
+        <tr>@Html.ActionLink(item.Name, "GetByShortName", "Category", new { shortname = item.ShortName }, null)
+        
+            <td style="padding-left:30px">@Html.ActionLink("Вверх", "Up", "Category", new { id = item.ID }, null)</td>
+            <td style="padding-left:30px">@Html.ActionLink("Вниз", "Down", "Category", new { id = item.ID }, null)</td>
+        </tr>
+        
+    </table>
+}

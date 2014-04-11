@@ -1,0 +1,19 @@
+﻿@model NewVersionLampstore.Models.Collection
+
+@{
+    ViewBag.Title = string.Format("Удаление коллекции | {0}", NewVersionLampstore.Constants.TITLE);
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+}
+
+<p>@Html.ActionLink("Отмена", "GetCollectionInCategory", new { category = Model.Category.ShortName, collection = Model.ShortName })</p>
+<h2 style="color:Red">Вы уверены, что хотите Видалити эту коллекцию?</h2>
+
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Видалити" />
+}
+
+<p style="font-weight:bold">@Model.Name</p>
+<p>Категория: <span style="font-weight:bold">@Model.Category.Name</span></p>
+<p>@Model.Description</p>

@@ -1,0 +1,87 @@
+﻿@model IEnumerable<NewVersionLampstore.Models.Product>
+
+
+@{
+    ViewBag.Title = string.Format("Товари | {0}", NewVersionLampstore.Constants.TITLE);
+    
+}
+
+<div id="breadcrumbs">
+    @Html.ActionLink("На головну", "Index", "Home")
+    @NewVersionLampstore.Constants.BREADCRUMBS_SEPARATOR
+    Товари
+</div>
+
+
+@functions
+{
+    public string RowProduct(ref int index)
+    {
+        string strResult = "<tr>";
+        
+        for(int innerIndex=0; innerIndex < NewVersionLampstore.Constants.PRODUCT_NUMBER_IN_ROW; innerIndex++)
+        {
+            strResult += "<td align=center valign=top class=ProductId>";
+           
+            
+            if(index < Model.Count())
+            {
+                
+                var obj = Model.Skip(index).Take(1).First();
+                string strImage = "0.jpg";
+                if(!string.IsNullOrWhiteSpace(obj.ImageExt)) { strImage = obj.ID.ToString() + obj.ImageExt.TrimEnd() + "?" + DateTime.Now.ToString(); }
+                strResult += "<table align=center cellpadding=5 class=ProductTable>" + "<tr class=ProductTr>" + "<td class=ProductImage>";
+                strResult += string.Format("<a href='{0}'><img src='{1}/{2}/{3}/{4}' alt='{5}' /></a>", Url.Action("GetByShortName", "Product", new { shortname = obj.ShortName, page = Request.QueryString["page"], find = Request.QueryString["find"] }), Url.Content("~/Content"), NewVersionLampstore.Constants.PRODUCT_IMAGES_FOLDER, NewVersionLampstore.Constants.PRODUCT_IMAGES_MINI_FOLDER, strImage, obj.Name);
+                strResult += "</td>";
+
+                strResult += "<td class=ProductInform>";
+                strResult += "<div class=g-price><div class=g-price-uah>";
+                strResult += obj.Price + "<span> грн " + "</span></div></div>";
+                string name = obj.Manufacturer.Name + " " + obj.Name;
+                strResult += "<div class=NameProduct>" + Html.ActionLink(name, "GetByShortName", "Product", new { shortname = obj.ShortName, page = Request.QueryString["page"], find = Request.QueryString["find"] }, null) + "</div>";
+
+
+                strResult += "<br/>" + "Висота" + "<span class=value>" + obj.height + "</span>";
+                strResult += "<br/>" + "Ширина" + "<span class=value>" + obj.width + "</span>";
+                strResult += "<br/>" + "Кількість ламп" + "<span class=value>" + obj.QuantytiLamp + "</span>";
+                strResult += "<br/>" + "Тип патрона" + "<span class=value>" + obj.cap + "</span>";
+                strResult += "<br/>" + "Максимальна потужність" + "<span class=value>" + obj.MaxWatt + "</span>";
+                strResult += "<br/>" + "Колір" + "<span class=value>" + obj.Color + "</span>";
+
+                strResult += "" + @Html.ActionLink("В корзину", "Add", "Cart", new { id = obj.ID }, new { @class = "add-cart" });
+                strResult += "</td>" + "</tr>" + "</table>";
+             
+            }
+
+            strResult += "</td>";
+            
+
+            index = index + 1;
+        }
+
+        strResult += "</tr>";
+        
+
+        return strResult;
+    }
+}
+
+
+<table id ="ProductTables" width="100%" border="0" cellpadding="5" >
+@{
+    int iProductCount = Model.Count();
+    int iProductIndex = 0;
+    
+    while(iProductIndex < iProductCount)
+    {
+        @MvcHtmlString.Create(RowProduct(ref iProductIndex))
+        
+    }
+}
+</table>
+<br /><br />
+
+<div class="pager">
+    
+    @Html.Partial("_Pager", new NewVersionLampstore.Pager(Request.QueryString["page"], new NewVersionLampstore.Service.ProductEntityService().Count(Request.QueryString), Request.QueryString).links)
+</div>

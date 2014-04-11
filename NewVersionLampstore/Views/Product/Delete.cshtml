@@ -1,0 +1,18 @@
+﻿@model NewVersionLampstore.Models.Product
+
+@{
+    ViewBag.Title = string.Format("Видалення Товару | {0}", NewVersionLampstore.Constants.TITLE);
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<p>@Html.ActionLink("Відміна", "GetByShortName", new { shortname = Model.ShortName })</p>
+<h2 style="color:Red">Ви впевнені Що хочите Видалити цей товар?</h2>
+
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Видалити" />
+}
+
+<p style="font-weight:bold">@Model.Name</p>
+<p><span style="font-weight:bold">Виробник: </span>@Model.Manufacturer.Name</p>
+<p>@Model.Description</p>

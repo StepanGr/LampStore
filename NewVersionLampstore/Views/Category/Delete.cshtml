@@ -1,0 +1,17 @@
+﻿@model NewVersionLampstore.Models.Category
+
+@{
+    ViewBag.Title = string.Format("Удаление категории | {0}", NewVersionLampstore.Constants.TITLE);
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+}
+
+<p>@Html.ActionLink("Отмена", "GetByShortName", new { shortname = Model.ShortName })</p>
+<h2 style="color:Red">Вы уверены, что хотите Видалити эту категорию?</h2>
+
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Видалити" />
+}
+
+<p style="font-weight:bold">@Model.Name</p>

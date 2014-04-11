@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LampaStoreModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="LampaStoreEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Manufacturers" EntityType="LampaStoreModel.Manufacturer" />
+    <EntitySet Name="Products" EntityType="LampaStoreModel.Product" />
+    <AssociationSet Name="FK_Product_Manufacturer" Association="LampaStoreModel.FK_Product_Manufacturer">
+      <End Role="Manufacturer" EntitySet="Manufacturers" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <EntitySet Name="Categories" EntityType="LampaStoreModel.Category" />
+    <EntitySet Name="Collections" EntityType="LampaStoreModel.Collection" />
+    <AssociationSet Name="FK_Collection_Category" Association="LampaStoreModel.FK_Collection_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Collection" EntitySet="Collections" />
+    </AssociationSet>
+    <EntitySet Name="CollectionImages" EntityType="LampaStoreModel.CollectionImage" />
+    <AssociationSet Name="FK_CollectionImage_Collection" Association="LampaStoreModel.FK_CollectionImage_Collection">
+      <End Role="Collection" EntitySet="Collections" />
+      <End Role="CollectionImage" EntitySet="CollectionImages" />
+    </AssociationSet>
+    <EntitySet Name="CategoryProducts" EntityType="LampaStoreModel.CategoryProduct" />
+    <AssociationSet Name="FK_CategoryProduct_Category" Association="LampaStoreModel.FK_CategoryProduct_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="CategoryProduct" EntitySet="CategoryProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CategoryProduct_Product" Association="LampaStoreModel.FK_CategoryProduct_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="CategoryProduct" EntitySet="CategoryProducts" />
+    </AssociationSet>
+    <EntitySet Name="CollectionProducts" EntityType="LampaStoreModel.CollectionProduct" />
+    <AssociationSet Name="FK_CollectionProduct_Collection" Association="LampaStoreModel.FK_CollectionProduct_Collection">
+      <End Role="Collection" EntitySet="Collections" />
+      <End Role="CollectionProduct" EntitySet="CollectionProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CollectionProduct_Product" Association="LampaStoreModel.FK_CollectionProduct_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="CollectionProduct" EntitySet="CollectionProducts" />
+    </AssociationSet>
+    <EntitySet Name="Orders" EntityType="LampaStoreModel.Order" />
+    <EntitySet Name="OrderItems" EntityType="LampaStoreModel.OrderItem" />
+    <EntitySet Name="OrderStatuses" EntityType="LampaStoreModel.OrderStatus" />
+    <AssociationSet Name="FK_OrderItem_Order" Association="LampaStoreModel.FK_OrderItem_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderItem" EntitySet="OrderItems" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Manufacturer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="Sequence" Type="Int32" />
+    <Property Name="ShortName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Products" Relationship="LampaStoreModel.FK_Product_Manufacturer" FromRole="Manufacturer" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ShortName" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="Sequence" />
+    <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="Price" Precision="15" Scale="0" />
+    <Property Type="Int32" Name="ManufacturerID" />
+    <NavigationProperty Name="Manufacturer" Relationship="LampaStoreModel.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
+    <Property Type="String" Name="ImageExt" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="CategoryProducts" Relationship="LampaStoreModel.FK_CategoryProduct_Product" FromRole="Product" ToRole="CategoryProduct" />
+    <NavigationProperty Name="CollectionProducts" Relationship="LampaStoreModel.FK_CollectionProduct_Product" FromRole="Product" ToRole="CollectionProduct" />
+    <Property Type="Int32" Name="Rating" />
+    <Property Type="Int32" Name="height" />
+    <Property Type="Int32" Name="width" />
+    <Property Type="String" Name="cap" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="MaxWatt" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Color" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="QuantytiLamp" />
+  </EntityType>
+  <Association Name="FK_Product_Manufacturer">
+    <End Type="LampaStoreModel.Manufacturer" Role="Manufacturer" Multiplicity="0..1" />
+    <End Type="LampaStoreModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manufacturer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="ManufacturerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ShortName" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ImageExt" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Type="Int32" Name="Sequence" />
+    <NavigationProperty Name="Collections" Relationship="LampaStoreModel.FK_Collection_Category" FromRole="Category" ToRole="Collection" />
+    <NavigationProperty Name="CategoryProducts" Relationship="LampaStoreModel.FK_CategoryProduct_Category" FromRole="Category" ToRole="CategoryProduct" />
+  </EntityType>
+  <EntityType Name="Collection">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ShortName" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="Sequence" />
+    <Property Type="String" Name="ImageExt" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Type="Int32" Name="CategoryID" />
+    <NavigationProperty Name="Category" Relationship="LampaStoreModel.FK_Collection_Category" FromRole="Collection" ToRole="Category" />
+    <NavigationProperty Name="CollectionImages" Relationship="LampaStoreModel.FK_CollectionImage_Collection" FromRole="Collection" ToRole="CollectionImage" />
+    <NavigationProperty Name="CollectionProducts" Relationship="LampaStoreModel.FK_CollectionProduct_Collection" FromRole="Collection" ToRole="CollectionProduct" />
+  </EntityType>
+  <Association Name="FK_Collection_Category">
+    <End Type="LampaStoreModel.Category" Role="Category" Multiplicity="0..1" />
+    <End Type="LampaStoreModel.Collection" Role="Collection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Collection">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CollectionImage">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="CollectionID" />
+    <Property Type="Int32" Name="Sequence" />
+    <Property Type="String" Name="ImageExt" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Collection" Relationship="LampaStoreModel.FK_CollectionImage_Collection" FromRole="CollectionImage" ToRole="Collection" />
+  </EntityType>
+  <Association Name="FK_CollectionImage_Collection">
+    <End Type="LampaStoreModel.Collection" Role="Collection" Multiplicity="0..1" />
+    <End Type="LampaStoreModel.CollectionImage" Role="CollectionImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Collection">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionImage">
+        <PropertyRef Name="CollectionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CategoryProduct">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="CategoryID" />
+    <Property Type="Int32" Name="ProductID" />
+    <Property Type="Int32" Name="Sequence" />
+    <NavigationProperty Name="Category" Relationship="LampaStoreModel.FK_CategoryProduct_Category" FromRole="CategoryProduct" ToRole="Category" />
+    <NavigationProperty Name="Product" Relationship="LampaStoreModel.FK_CategoryProduct_Product" FromRole="CategoryProduct" ToRole="Product" />
+  </EntityType>
+  <Association Name="FK_CategoryProduct_Category">
+    <End Type="LampaStoreModel.Category" Role="Category" Multiplicity="0..1" />
+    <End Type="LampaStoreModel.CategoryProduct" Role="CategoryProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CategoryProduct">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CategoryProduct_Product">
+    <End Type="LampaStoreModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="LampaStoreModel.CategoryProduct" Role="CategoryProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CategoryProduct">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CollectionProduct">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="CollectionID" />
+    <Property Type="Int32" Name="ProductID" />
+    <Property Type="Int32" Name="Sequence" />
+    <NavigationProperty Name="Collection" Relationship="LampaStoreModel.FK_CollectionProduct_Collection" FromRole="CollectionProduct" ToRole="Collection" />
+    <NavigationProperty Name="Product" Relationship="LampaStoreModel.FK_CollectionProduct_Product" FromRole="CollectionProduct" ToRole="Product" />
+  </EntityType>
+  <Association Name="FK_CollectionProduct_Collection">
+    <End Type="LampaStoreModel.Collection" Role="Collection" Multiplicity="0..1" />
+    <End Type="LampaStoreModel.CollectionProduct" Role="CollectionProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Collection">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionProduct">
+        <PropertyRef Name="CollectionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CollectionProduct_Product">
+    <End Type="LampaStoreModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="LampaStoreModel.CollectionProduct" Role="CollectionProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionProduct">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="Date" />
+    <Property Type="String" Name="FirstName" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="LastName" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Phone" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Address" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="OrderStatus" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="OrderItems" Relationship="LampaStoreModel.FK_OrderItem_Order" FromRole="Order" ToRole="OrderItem" />
+    <Property Type="String" Name="TypePayment" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="TypeShipped" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Email" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="OrderItem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="OrderID" />
+    <Property Type="Int32" Name="ProductID" />
+    <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Manufacturer" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="Number" />
+    <Property Type="Decimal" Name="Price" Precision="18" Scale="0" />
+    <NavigationProperty Name="Order" Relationship="LampaStoreModel.FK_OrderItem_Order" FromRole="OrderItem" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="OrderStatus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="Sequence" />
+  </EntityType>
+  <Association Name="FK_OrderItem_Order">
+    <End Type="LampaStoreModel.Order" Role="Order" Multiplicity="0..1" />
+    <End Type="LampaStoreModel.OrderItem" Role="OrderItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderItem">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

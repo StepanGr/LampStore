@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>@ViewBag.Title</title>
+    @{Layout = null;}
+    <link rel="shortcut icon" href="@Url.Content("~/Content/images/Icon.png")"/>
+
+    <link href="@Url.Content("~/Content/css/style.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/nivo-slider.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/tiny.css")" rel="stylesheet" type="text/css" />   
+    <link href="@Url.Content("~/Content/css/fancybox.css")" rel="stylesheet" type="text/css" />    
+        
+    <script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.nivo.slider.pack.js")" type="text/javascript"></script> 
+    <script src="@Url.Content("~/Scripts/jquery.tinycarousel.min.js")" type="text/javascript"></script> 
+    <script src="@Url.Content("~/Scripts/jquery.fancybox.js")" type="text/javascript"></script>
+           
+
+</head>
+<body>
+
+
+
+
+
+<div id="Main_line">
+<figure class="main_line"></figure>
+<img src="@Url.Content("~/Content/images/showcase-shadow.png")" id="" alt="" border="0" style="position: absolute; top:-25px;width:100%;height:25px;z-index:0;"/>
+<img src="@Url.Content("~/Content/images/showcase-shadow2.png")" id="" alt="" border="0" style="position: absolute; top:155px;width:100%;height:25px;z-index:0;"/>
+</div>
+
+
+<div id="Logo">
+<a href="../"><figure class="logo_image"></figure></a>
+</div>
+
+
+<div id="Search">
+<figure class="search_image"></figure>
+ 
+</div>
+
+
+
+
+<div id="telephone">
+<figure class="tel_image"></figure>
+<div id="Tel_number">(0352) 26 26 26 <br/>(097) 097 97 97</div>
+</div>
+
+
+
+
+<div id="Korzina">
+@{Html.RenderAction("Summary", "Cart");}
+</div>
+
+
+
+<div id="Menu">
+<a id="menu_main" href="./"></a>
+<a id="menu_payment_and_shipping" href="@Url.Action("Payment_and_Shipping", "Information")"></a>
+<a id="menu_promotions_and_news" href="@Url.Action("Promotions_and_News", "Information")"></a>
+<a id="menu_contact_information" href="@Url.Action("Contact_Information","Information")"></a>
+</div>
+
+
+
+
+<div id="Products_line">
+<img src="@Url.Content("~/Content/images/showcase-shadow2.png")" id="" alt="" border="0" style="position: absolute; top:92px;width:100%;height:25px;z-index:5;"/>
+@Html.Partial("TabsCategory")
+</div>
+
+
+
+<div id="Baner">
+<div id="slider" class="nivoSlider">
+        <img src="@Url.Content("~/Content/images/pic1.png")" alt="" />
+        <img src="@Url.Content("~/Content/images/pic2.png")" alt="" />
+        <img src="@Url.Content("~/Content/images/pic3.png")" alt="" />
+        <img src="@Url.Content("~/Content/images/pic4.png")" alt="" />
+        <img src="@Url.Content("~/Content/images/pic5.png")" alt="" />
+        
+    </div>
+</div>
+
+
+
+<div id="slider_line1">
+
+
+<div id="slide_line1_menu">
+<a id="menu_hits" href="./"></a>
+<a id="menu_novelty" href="./"></a>
+<a id="menu_recommend" href="./"></a>
+</div>
+
+
+<div id="slider1">
+		<a class="buttons prev" href="#">left</a>
+		<div class="viewport">
+			<ul class="overview">
+				<li><img src="@Url.Content("~/Content/images/hits/1.jpg")" />Massive 15035/45/10</li>
+				<li><img src="@Url.Content("~/Content/images/hits/3.jpg")" /></li>
+				<li><img src="@Url.Content("~/Content/images/hits/4.jpg")" /></li>
+				<li><img src="@Url.Content("~/Content/images/hits/6.jpg")" /></li>
+				<li><img src="@Url.Content("~/Content/images/hits/8.jpg")" /></li>
+			</ul>
+		</div>
+		<a class="buttons next" href="#">right</a>
+	</div>
+
+
+<img src="@Url.Content("~/Content/images/showcase-shadow2.png")" id="" alt="" border="0" style="position: relative; top:0px;width:100%;height:25px;z-index:5;"/>
+
+
+</div>
+
+
+<div id="slider_line2">
+
+
+
+<div id="slider_line2_menu">
+<a id="menu_brands"href="./"></a>
+</div>
+
+
+<div id="slider2">
+<a class="buttons prev" href="#">left</a>
+		<div class="viewport">
+			<ul class="overview">
+				<li><img src="@Url.Content("~/Content/images/brends/alma_light.jpg")" title="Alma" />Alma</li>
+				<li><img src="@Url.Content("~/Content/images/brends//augenti.jpg")"title="Augenti" />Augenti</li>
+				<li><img src="@Url.Content("~/Content/images/brends/beby_group.jpg")" /></li>
+				<li><img src="@Url.Content("~/Content/images/brends//blitz.jpg")" /></li>
+				<li><img src="@Url.Content("~/Content/images/brends//edi_light.jpg")" /></li>
+				<li><img src="@Url.Content("~/Content/images/brends/emme_pi_light.jpg")" /></li>
+				<li><img src="@Url.Content("~/Content/images/brends/fm_lluminacion.jpg")" /></li>									
+				<li><img src="@Url.Content("~/Content/images/brends/galleri_vetri_d_arte.jpg")" /></li>
+				<li><img src="@Url.Content("~/Content/images/brends/ideal_lux.jpg")" /></li>
+				<li><img src="@Url.Content("~/Content/images/brends/kanlux.jpg")" /></li>
+				<li><img src="@Url.Content("~/Content/images/brends/la_lampada.jpg")" /></li>
+				<li><img src="@Url.Content("~/Content/images/brends/linea_light.jpg")" /></li>
+				<li><img src="@Url.Content("~/Content/images/brends/masiero.jpg")" /></li>
+				<li><img src="@Url.Content("~/Content/images/brends/massive.jpg")" /></li>
+				<li><img src="@Url.Content("~/Content/images/brends/moretti_luce.jpg" )"/></li>
+				<li><img src="@Url.Content("~/Content/images/brends/reccagni_angelo(1).jpg")" /></li>
+				<li><img src="@Url.Content("~/Content/images/brends/reccagni_angelo(1).jpg")" /></li>									
+				<li><img src="@Url.Content("~/Content/images/brends/rogu.jpg")" /></li>
+				<li><img src="@Url.Content("~/Content/images/brends/sforzin.jpg")" /></li>
+				<li><img src="@Url.Content("~/Content/images/brends/vistosi.jpg")" /></li>
+			</ul>
+		</div>
+		<a class="buttons next" href="#">right</a>
+</div>
+
+
+<img src="@Url.Content("~/Content/images/showcase-shadow2.png")" id="" alt="" border="0" style="position: relative; top:0px; width:100%;height:25px;z-index:5;"/>	
+
+
+</div>
+
+
+<div id="Text_in_Main">
+<a href="http://biglamp.te.ua"><img src="@Url.Content("~/Content/images/logo_smoll.png")"  alt=""  /></a>
+Интернет магазин Велика Лампа
+Вас интересует бытовая техника, компьютеры, софт или Товари для активного отдыха? Все это вы можете купить прямо сейчас, сэкономив уйму времени! Интернет-магазин Rozetka™ с радостью поможет вам избежать необходимости посещать десятки магазинов. Вы можете заказать любой товар, не вставая со своего кресла, а наш курьер вовремя доставит покупку по указанному адресу. Интернет магазин (Украина) Rozetka™ действует на территории всей страны. Жители любых городов могут без лишних хлопот посетить наш интернет-магазин (Харьков, Киев, Донецк и другие города).
+Подробнее: http://rozetka.com.ua/?gclid=CLvu5tX1iagCFci-zAodHENbCg
+</div>
+
+@using (Html.BeginForm("GetByShortName", "Product", new { shortname = string.Empty }, FormMethod.Get, null))
+{
+     @Html.TextBox("find", Request.QueryString["find"], new { @class="TextBoxSearch"})
+<div id="search_button">  <input type="submit" title="Шукати" value=" " class="SearchButton" /></div>
+}
+
+<div id="footer">
+<div id="info">
+
+  <div class="column">
+    <h4>Інформація</h4>
+    <ul>
+            <li><a href="">Доставка і оплата</a></li>
+            <li><a href="">Гарантія</a></li>
+            <li><a href="">Умови користування сайтом</a></li>
+          </ul>
+  </div>
+  
+  <div class="column">
+    <h4>Додатково</h4>
+    <ul>
+      <li><a href="">Бренди</a></li>
+      <li><a href="">Акції</a></li>
+      <li><a href="">Мапа сайту</a></li>
+    </ul>
+  </div>
+
+  <div class="column">
+    <h4>Контакти</h4>
+    <ul>
+      <li>123-456-7890</li>
+      <li>info@demostore</li>
+      <li><a href="">Контакти</a></li>
+    </ul>
+   </div>
+
+  <div class="column">
+    <h4>Слідкуйте за нами</h4>
+    <ul>
+      <li><div id="social"><a class="vkbutton" href="#" target="_blank" title="Vkontakte">Vkontakte</a><a class="facebookbutton" href="#" target="_blank" title="Facebook">Facebook</a><a class="twitterbutton" href="#" target="_blank" title="Twitter">Twitter</a><a class="googlebutton" href="#" target="_blank" title="Google+">Google+</a></div></li>
+    </ul>
+  </div>
+
+<div id="powered"> Велика Лампа 2014</div>
+
+</div>
+</div>
+
+
+
+</body>
+</html>

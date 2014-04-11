@@ -1,0 +1,15 @@
+﻿@model NewVersionLampstore.Models.Category
+
+@Html.ValidationSummary()
+
+@Html.LabelFor(model => model.Name)
+<br />
+@Html.EditorFor(model => model.Name)
+<span style="color:Red">@Html.ValidationMessageFor(model => model.Name)</span>
+<br /><br />
+
+@Html.LabelFor(model => model.ShortName)
+<br />
+@Html.EditorFor(model => model.ShortName)
+<span style="color:Red">@Html.ValidationMessageFor(model => model.ShortName)</span>
+<br /><br />

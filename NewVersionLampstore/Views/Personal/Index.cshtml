@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = string.Format("Персональні дані | {0}", NewVersionLampstore.Constants.TITLE);
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    
+}
+
+<p>
+    @Html.ActionLink("На головну", "Index", "Admin")
+    @NewVersionLampstore.Constants.BREADCRUMBS_SEPARATOR
+    Особиста сторінка
+</p>
+
+<h2>Персональні дані</h2>
+<p>@Html.ActionLink("Змінити Пароль", "ChangePassword", "Account")</p>
+<p>@Html.ActionLink("Редагувати", "Edit")</p>
+
+<table>
+    <tr>
+        <td>Имя</td>
+        <td style="font-weight:bold">@Model.FirstName</td>
+    </tr>
+    <tr>
+        <td>Фамилия</td>
+        <td style="font-weight:bold">@Model.LastName</td>
+    </tr>
+    <tr>
+        <td>Телефон</td>
+        <td style="font-weight:bold">@Model.Phone</td>
+    </tr>
+    <tr>
+        <td>Адрес</td>
+        <td style="font-weight:bold">@Model.Address</td>
+    </tr>
+    
+</table>

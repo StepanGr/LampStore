@@ -1,0 +1,48 @@
+﻿
+  
+ 
+ 
+ 
+ @{Layout = null;}
+ @{int quantity=0;
+   decimal sumPrice = 0;
+     Dictionary<int, int> infocart;
+     if((Session[NewVersionLampstore.Constants.SESSION_CART] as Dictionary<int, int>)==null)
+     {
+          infocart = new Dictionary<int, int>();
+     }
+     else{    
+      infocart = Session[NewVersionLampstore.Constants.SESSION_CART] as Dictionary<int, int>;
+      
+         foreach (var key in infocart.Keys)
+          {
+              NewVersionLampstore.Models.Product product = new NewVersionLampstore.Service.ProductEntityService().Get(key);
+              sumPrice += product.Price.Value * infocart[key];
+               int q = infocart[key];
+               quantity += q;
+          }
+     } 
+     }
+@if (infocart.Count == 0)
+     {
+
+<img alt="" src="@Url.Content("~/Content/images/Korzina.png")" />
+     }
+@if (infocart.Count != 0)
+{
+  <a id="cart_full" href="@Url.Action("Index", "Cart")" ></a> 
+<div id="cart_number"> 
+ @quantity.ToString()
+</div>
+<div id="cart_sum"> 
+@sumPrice.ToString()
+</div>
+}
+
+
+ 
+ 
+
+
+ 
+ 

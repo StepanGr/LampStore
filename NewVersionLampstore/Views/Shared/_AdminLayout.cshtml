@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Admin.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+    
+</head>
+<body>
+    <div class="page">
+    <div id="search">
+    @using (Html.BeginForm("GetByShortName", "Product", new { shortname = string.Empty }, FormMethod.Get, null))
+                {
+                    @Html.TextBox("find", Request.QueryString["find"])
+                    <input type="submit" value="Найти" />
+                }
+    </div>
+        <div id="header">
+            <div id="title">
+                <h1>@NewVersionLampstore.Constants.TITLE</h1>
+                
+            </div>
+            <div id="logindisplay">
+                @Html.Partial("_LogOnPartial")
+            </div>
+            @if (Request.IsAuthenticated && (User.IsInRole(NewVersionLampstore.Constants.ROLE_ADMIN)))
+             {
+            <div id="menucontainer">
+                <ul id="menu">
+                    
+                    
+                    <li>@Html.ActionLink("Виробники", "GetByShortName", "Manufacturer", new { shortName = string.Empty }, null)</li>
+                    <li>@Html.ActionLink("Товари", "GetByShortName", "Product", new { shortname = string.Empty }, null)</li>
+                   
+                        <li>@Html.ActionLink("Особисті дані", "Index", "Personal")</li> 
+                        <li>@Html.ActionLink("Категорії", "GetByShortName", "Category")</li>
+                        <li>@Html.ActionLink("Коллекції", "GetByShortName", "Collection")</li>
+                    
+                   
+                        <li>@Html.ActionLink("Контент Менеджер", "Index", "ContantManager")</li> 
+                    
+                        <li>@Html.ActionLink("Заказы", "Index", "Order")</li>
+                    
+                        <li>@Html.ActionLink("Статусы заказа", "Index", "OrderStatus")</li>
+                    
+                    
+                </ul>
+            </div>
+             }
+        </div>
+             
+        <div id="main">
+            @RenderBody()
+        </div>
+        <div id="footer">
+        </div>
+    </div>
+    
+</body>
+</html>

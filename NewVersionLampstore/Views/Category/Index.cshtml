@@ -1,0 +1,18 @@
+﻿@model IEnumerable<NewVersionLampstore.Models.Category>
+
+@{
+    ViewBag.Title = NewVersionLampstore.Constants.TITLE;
+    
+    } 
+
+
+
+
+@foreach (var item in Model)
+{
+    <ul>
+        <li>@Html.ActionLink(item.Name, "GetByShortName", "Category", new { shortname = item.ShortName }, null)</li>
+        
+    </ul>
+}
+

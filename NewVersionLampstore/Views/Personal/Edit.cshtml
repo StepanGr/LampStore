@@ -1,0 +1,37 @@
+﻿@model NewVersionLampstore.Models.UserProfile
+
+@{
+    ViewBag.Title = "Редактирование личных данных";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    
+}
+
+<p>@Html.ActionLink("Отмена", "Index")</p>
+<h2>Редактирование личных данных</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.FirstName)
+    <br />
+    @Html.EditorFor(model => model.FirstName)
+    <br /><br />
+    
+    @Html.LabelFor(model => model.LastName)
+    <br />
+    @Html.EditorFor(model => model.LastName)
+    <br /><br />
+    @Html.LabelFor(model => model.Phone)
+    <br />
+    @Html.EditorFor(model => model.Phone)
+    <br /><br />
+    
+    @Html.LabelFor(model => model.Address)
+    <br />
+    @Html.EditorFor(model => model.Address)
+    <br /><br />
+
+    
+   
+    
+    <input type="submit" value="Зберегти" />
+}

@@ -1,0 +1,20 @@
+﻿@model NewVersionLampstore.Models.Manufacturer
+
+@{
+    ViewBag.Title = "Удаление невозможно";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<p>@Html.ActionLink("К списку", "GetByShortName", new { shortName = string.Empty })</p>
+<h2>Удаление невозможно</h2>
+<span style="color:Red">Спочатку Видаліть товар цього виробника</span>
+
+@if (Model != null && Model.Products.Count > 0)
+{
+    <ul>
+    @foreach (var item in Model.Products)
+    {
+        <li>@Html.ActionLink(item.Name, "GetByShortName", "Product", new { shortname = item.ShortName }, null)</li>
+    }
+    </ul>
+}

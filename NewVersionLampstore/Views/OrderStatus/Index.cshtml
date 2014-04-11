@@ -1,0 +1,29 @@
+﻿@model IEnumerable<NewVersionLampstore.Models.OrderStatus>
+
+@{
+    ViewBag.Title = string.Format("Статусы заказа | {0}", NewVersionLampstore.Constants.TITLE);
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+
+<p>
+    @Html.ActionLink("На головну", "Index", "Home")
+    @NewVersionLampstore.Constants.BREADCRUMBS_SEPARATOR
+    Статусы заказа
+</p>
+
+<h2>Статусы заказа</h2>
+
+<p>@Html.ActionLink("Создать", "Create")</p>
+
+<table>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@Html.ActionLink(item.Name, "Edit", new { id = item.ID })</td>
+        <td style="padding-left:30px">@Html.ActionLink("Вверх", "Up", new { id = item.ID })</td>
+        <td style="padding-left:30px">@Html.ActionLink("Вниз", "Down", new { id = item.ID })</td>
+        <td style="padding-left:30px">@Html.ActionLink("Удалить", "DeleteExpress", new { id = item.ID }, new { onclick = "javascript:return confirm('Вы уверены?')" })</td>
+    </tr>
+}
+</table>

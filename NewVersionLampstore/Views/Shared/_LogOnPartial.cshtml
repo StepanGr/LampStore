@@ -1,0 +1,10 @@
+﻿@{
+    NewVersionLampstore.Models.UserProfile profile = new NewVersionLampstore.Models.UserProfile(User.Identity.Name);
+    }
+@if(Request.IsAuthenticated) {
+    <text>Добрий день <strong>@(string.IsNullOrWhiteSpace(profile.FirstName) ? User.Identity.Name: profile.FirstName)</strong>!
+    [ @Html.ActionLink("Log Off", "LogOff", "Account") ]</text>
+}
+else {
+    @:[ @Html.ActionLink("Log On", "LogOn", "Account") ]
+}

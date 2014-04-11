@@ -1,0 +1,17 @@
+﻿@model NewVersionLampstore.Models.Manufacturer
+
+@{
+    ViewBag.Title = string.Format("Видалення виробника | {0}", NewVersionLampstore.Constants.TITLE);
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<p>@Html.ActionLink("Відміна", "GetByShortName", new { shortName = Model.ShortName })</p>
+<h2 style="color:Red">Ви впевненні що хочите видалити цього виробника?</h2>
+
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Видалити" />
+}
+
+<p style="font-weight:bold">@Model.Name</p>
+<p>@Model.Description</p>

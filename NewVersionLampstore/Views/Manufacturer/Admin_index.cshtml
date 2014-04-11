@@ -1,0 +1,33 @@
+﻿
+@model IEnumerable<NewVersionLampstore.Models.Manufacturer>
+
+@{
+    ViewBag.Title = string.Format("Виробники | {0}", NewVersionLampstore.Constants.TITLE);
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    
+}
+<p id="breadcrumbs">
+    @Html.ActionLink("На головну", "Index", "Home")
+    @NewVersionLampstore.Constants.BREADCRUMBS_SEPARATOR
+    Виробники
+</p>
+
+<h2>Виробники</h2>
+@if (Request.IsAuthenticated && (User.IsInRole(NewVersionLampstore.Constants.ROLE_ADMIN) || User.IsInRole(NewVersionLampstore.Constants.ROLE_CONTENT_MANAGER)))
+{
+<p>@Html.ActionLink("Створити", "Create")</p>
+    }
+<ul>
+<table>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@Html.ActionLink(item.Name, "GetByShortName", new { shortName = item.ShortName })</td>
+        
+        <td style="padding-left:30px;">@Html.ActionLink("Вверх", "Up", new { id = item.ID })</td>
+        <td style="padding-left:30px;">@Html.ActionLink("Вниз", "Down", new { id = item.ID })</td>
+       
+    </tr>
+}
+</table>
+</ul>

@@ -1,0 +1,36 @@
+﻿@{var manufacturers = new NewVersionLampstore.Service.ManufacturerEntityService().Get();}
+@{var quantitylamp = new NewVersionLampstore.Service.ProductEntityService().Get().Select(x => x.QuantytiLamp).Distinct().OrderBy(x => x).Skip(1);}
+@{var collection = new NewVersionLampstore.Service.CollectionEntityService().Get();}
+   <script type="text/javascript">
+
+       function SubmitForm() {
+           document.getElementById('Filter').submit();
+           return false;
+       }
+ 
+</script>
+
+<h2>Бренди</h2>
+<ul>
+@foreach (var item in manufacturers)
+{
+   <li class="@item.ShortName"> @Html.ActionLink(item.Name, "GetByShortName", "Manufacturer", new { shortName = item.ShortName }, null):(@item.Products.Count)</li> 
+}
+</ul>
+
+<h2>Колеції</h2>
+<ul>
+@foreach (var item in collection)
+{
+   <li class="@item.ShortName"> @Html.ActionLink(item.Name, "GetByShortName", "Collection", new { shortName = item.ShortName }, null)</li> 
+}
+</ul>
+<h2>Кількість ламп</h2>
+@using (Html.BeginForm("GetByShortName", "Product", new { shortname = string.Empty }, FormMethod.Get, new { id="Filter"}))
+{
+    foreach (var quantitylamps in quantitylamp)
+    {
+     <div ><input type="checkbox" onclick="SubmitForm()" name="quantitylamps" value="@quantitylamps" id="@quantitylamps" /> @quantitylamps </div> 
+      
+    }
+}

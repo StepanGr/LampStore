@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LampaStoreModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="LampaStoreModelStoreContainer">
+    <EntitySet Name="Category" EntityType="LampaStoreModel.Store.Category" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CategoryProduct" EntityType="LampaStoreModel.Store.CategoryProduct" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Collection" EntityType="LampaStoreModel.Store.Collection" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CollectionImage" EntityType="LampaStoreModel.Store.CollectionImage" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CollectionProduct" EntityType="LampaStoreModel.Store.CollectionProduct" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Manufacturer" EntityType="LampaStoreModel.Store.Manufacturer" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Order" EntityType="LampaStoreModel.Store.Order" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OrderItem" EntityType="LampaStoreModel.Store.OrderItem" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OrderStatus" EntityType="LampaStoreModel.Store.OrderStatus" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Product" EntityType="LampaStoreModel.Store.Product" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_CategoryProduct_Category" Association="LampaStoreModel.Store.FK_CategoryProduct_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="CategoryProduct" EntitySet="CategoryProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CategoryProduct_Product" Association="LampaStoreModel.Store.FK_CategoryProduct_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="CategoryProduct" EntitySet="CategoryProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Collection_Category" Association="LampaStoreModel.Store.FK_Collection_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Collection" EntitySet="Collection" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CollectionImage_Collection" Association="LampaStoreModel.Store.FK_CollectionImage_Collection">
+      <End Role="Collection" EntitySet="Collection" />
+      <End Role="CollectionImage" EntitySet="CollectionImage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CollectionProduct_Collection" Association="LampaStoreModel.Store.FK_CollectionProduct_Collection">
+      <End Role="Collection" EntitySet="Collection" />
+      <End Role="CollectionProduct" EntitySet="CollectionProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CollectionProduct_Product" Association="LampaStoreModel.Store.FK_CollectionProduct_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="CollectionProduct" EntitySet="CollectionProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderItem_Order" Association="LampaStoreModel.Store.FK_OrderItem_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderItem" EntitySet="OrderItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Manufacturer" Association="LampaStoreModel.Store.FK_Product_Manufacturer">
+      <End Role="Manufacturer" EntitySet="Manufacturer" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="ShortName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sequence" Type="int" />
+    <Property Name="ImageExt" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="CategoryProduct">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryID" Type="int" />
+    <Property Name="ProductID" Type="int" />
+    <Property Name="Sequence" Type="int" />
+  </EntityType>
+  <EntityType Name="Collection">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="text" />
+    <Property Name="ShortName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sequence" Type="int" />
+    <Property Name="ImageExt" Type="nchar" MaxLength="10" />
+    <Property Name="CategoryID" Type="int" />
+  </EntityType>
+  <EntityType Name="CollectionImage">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CollectionID" Type="int" />
+    <Property Name="Sequence" Type="int" />
+    <Property Name="ImageExt" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="CollectionProduct">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CollectionID" Type="int" />
+    <Property Name="ProductID" Type="int" />
+    <Property Name="Sequence" Type="int" />
+  </EntityType>
+  <EntityType Name="Manufacturer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="text" />
+    <Property Name="Sequence" Type="int" />
+    <Property Name="ShortName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="OrderStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="TypePayment" Type="nvarchar" MaxLength="50" />
+    <Property Name="TypeShipped" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="OrderItem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="int" />
+    <Property Name="ProductID" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Manufacturer" Type="nvarchar" MaxLength="50" />
+    <Property Name="Number" Type="int" />
+    <Property Name="Price" Type="decimal" />
+  </EntityType>
+  <EntityType Name="OrderStatus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sequence" Type="int" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="ShortName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sequence" Type="int" />
+    <Property Name="Description" Type="text" />
+    <Property Name="Price" Type="decimal" />
+    <Property Name="ManufacturerID" Type="int" />
+    <Property Name="ImageExt" Type="nchar" MaxLength="10" />
+    <Property Name="Rating" Type="int" />
+    <Property Name="height" Type="int" />
+    <Property Name="width" Type="int" />
+    <Property Name="cap" Type="nvarchar" MaxLength="10" />
+    <Property Name="MaxWatt" Type="nvarchar" MaxLength="10" />
+    <Property Name="Color" Type="nvarchar" MaxLength="50" />
+    <Property Name="QuantytiLamp" Type="int" />
+  </EntityType>
+  <Association Name="FK_CategoryProduct_Category">
+    <End Role="Category" Type="LampaStoreModel.Store.Category" Multiplicity="0..1" />
+    <End Role="CategoryProduct" Type="LampaStoreModel.Store.CategoryProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CategoryProduct">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CategoryProduct_Product">
+    <End Role="Product" Type="LampaStoreModel.Store.Product" Multiplicity="0..1" />
+    <End Role="CategoryProduct" Type="LampaStoreModel.Store.CategoryProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CategoryProduct">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Collection_Category">
+    <End Role="Category" Type="LampaStoreModel.Store.Category" Multiplicity="0..1" />
+    <End Role="Collection" Type="LampaStoreModel.Store.Collection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Collection">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CollectionImage_Collection">
+    <End Role="Collection" Type="LampaStoreModel.Store.Collection" Multiplicity="0..1" />
+    <End Role="CollectionImage" Type="LampaStoreModel.Store.CollectionImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Collection">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionImage">
+        <PropertyRef Name="CollectionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CollectionProduct_Collection">
+    <End Role="Collection" Type="LampaStoreModel.Store.Collection" Multiplicity="0..1" />
+    <End Role="CollectionProduct" Type="LampaStoreModel.Store.CollectionProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Collection">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionProduct">
+        <PropertyRef Name="CollectionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CollectionProduct_Product">
+    <End Role="Product" Type="LampaStoreModel.Store.Product" Multiplicity="0..1" />
+    <End Role="CollectionProduct" Type="LampaStoreModel.Store.CollectionProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionProduct">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderItem_Order">
+    <End Role="Order" Type="LampaStoreModel.Store.Order" Multiplicity="0..1" />
+    <End Role="OrderItem" Type="LampaStoreModel.Store.OrderItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderItem">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Manufacturer">
+    <End Role="Manufacturer" Type="LampaStoreModel.Store.Manufacturer" Multiplicity="0..1" />
+    <End Role="Product" Type="LampaStoreModel.Store.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manufacturer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="ManufacturerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,123 @@
+﻿@model NewVersionLampstore.Models.Category
+
+@{
+    ViewBag.Title = string.Format("{0} | {1}", Model.Name, NewVersionLampstore.Constants.TITLE);
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<p>
+    @Html.ActionLink("На головну", "Index", "Home")
+    @NewVersionLampstore.Constants.BREADCRUMBS_SEPARATOR
+    
+    
+    @Model.Name
+</p>
+
+<h2>@Model.Name</h2>
+
+
+    <p>@Html.ActionLink("Редагувати", "Edit", new { id = Model.ID })&nbsp;&nbsp;&nbsp;@Html.ActionLink("Видалити", "Delete", new { id = Model.ID })</p>
+
+@functions
+{
+    public string Row(ref int index)
+    {
+        string strResult = "<tr>";
+        
+        for(int innerIndex=0; innerIndex < NewVersionLampstore.Constants.COLLECTION_NUMBER_PER_ROW; innerIndex++)
+        {
+            strResult += "<td style='text-align:center; padding-bottom:20px;'>";
+            
+            if(index < Model.Collections.Count())
+            {
+                var obj = Model.Collections.OrderByDescending(item => item.Sequence).Skip(index).Take(1).First();
+                string strImage = "0.jpg";
+                if(!string.IsNullOrWhiteSpace(obj.ImageExt)) { strImage = obj.ID.ToString() + obj.ImageExt.TrimEnd() + "?" + DateTime.Now.ToString(); }
+                strResult += string.Format("<a href='{0}'><img src='{1}/{2}/{3}' alt='{4}' /></a>", Url.Action("GetCollectionInCategory", "Collection", new { category = obj.Category.ShortName, collection = obj.ShortName }), Url.Content("~/Content"), NewVersionLampstore.Constants.COLLECTION_MINI_IMAGES_FOLDER, strImage, obj.Name);
+                strResult += "<br />";
+
+                strResult += Html.ActionLink(obj.Name, "GetCollectionInCategory", "Collection", new { category = obj.Category.ShortName, collection = obj.ShortName }, null);
+                
+                
+                    strResult += "<br />";
+                    strResult += Html.ActionLink("<- Вверх", "Up", "Collection", new { id = obj.ID }, null);
+                    strResult += "&nbsp;&nbsp;&nbsp;";
+                    strResult += Html.ActionLink("Вниз ->", "Down", "Collection", new { id = obj.ID }, null);
+                
+            }
+
+            strResult += "</td>";
+
+            index = index + 1;
+        }
+
+        strResult += "</tr>";
+
+        return strResult;
+    }
+    public string RowProducts(ref int index)
+    {
+        string strResult = "<tr>";
+
+        for (int innerIndex = 0; innerIndex < NewVersionLampstore.Constants.PRODUCT_NUMBER_IN_ROW; innerIndex++)
+        {
+            strResult += "<td align=center valign=top class=ProductId>";
+
+            if (index < Model.CategoryProducts.Count())
+            {
+                var obj = Model.CategoryProducts.OrderByDescending(item => item.Sequence).Skip(index).Take(1).First();
+                string strImage = "0.jpg";
+                if (!string.IsNullOrWhiteSpace(obj.Product.ImageExt)) { strImage = obj.Product.ID.ToString() + obj.Product.ImageExt.TrimEnd() + "?" + DateTime.Now.ToString(); }
+                strResult += "<table align=center cellpadding=5 class=ProductTable>" + "<tr class=ProductTr>" + "<td class=ProductImage>";
+                strResult += string.Format("<a href='{0}'><img src='{1}/{2}/{3}/{4}' alt='{5}' /></a>", Url.Action("GetProductInCategory", "Product", new { category = obj.Category.ShortName, product = obj.Product.ShortName }), Url.Content("~/Content"), NewVersionLampstore.Constants.PRODUCT_IMAGES_FOLDER, NewVersionLampstore.Constants.PRODUCT_IMAGES_MINI_FOLDER, strImage, obj.Product.Name);
+                strResult += "</td>"; 
+                
+                strResult += "<td class=ProductInform>";
+                strResult += "<div class=g-price><div class=g-price-uah>";
+                strResult += obj.Product.Price + "<span> грн " + "</span></div></div>";
+                string name = obj.Product.Manufacturer.Name + " " + obj.Product.Name;
+                strResult += "<div class=NameProduct>" + Html.ActionLink(name, "GetProductInCategory", "Product", new { category = obj.Category.ShortName, product = obj.Product.ShortName }, null) + "</div>";
+
+
+                strResult += "" + @Html.ActionLink("В корзину", "Add", "Cart", new { id = obj.ID }, new { @class = "classname" });
+                strResult += "</td>" + "</tr>" + "</table>";
+              
+                    strResult += "<br />";
+                    strResult += Html.ActionLink("<- Вверх", "Up", "CategoryProduct", new { id = obj.ID }, null);
+                    strResult += "&nbsp;&nbsp;&nbsp;";
+                    strResult += Html.ActionLink("Вниз ->", "Down", "CategoryProduct", new { id = obj.ID }, null);
+                
+            }
+
+            strResult += "</td>";
+
+            index = index + 1;
+        }
+
+        strResult += "</tr>";
+
+        return strResult;
+    }
+}
+<table id ="ProductTables" width="100%" border="0" cellpadding="5" >
+@{
+    int iCategoryProductsCount = Model.CategoryProducts.Count;
+    int iCategoryProductIndex = 0;
+
+    while (iCategoryProductIndex < iCategoryProductsCount)
+    {
+        @MvcHtmlString.Create(RowProducts(ref iCategoryProductIndex))
+    }
+}
+</table>
+<table  width="100%" border="0" cellpadding="5" style="padding: 0 15px 0 15px;">
+@{
+    int iCount = Model.Collections.Count;
+    int i = 0;
+    
+    while(i < iCount)
+    {
+        @MvcHtmlString.Create(Row(ref i))
+    }
+}
+</table>

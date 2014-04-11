@@ -1,0 +1,31 @@
+﻿@model NewVersionLampstore.Models.Category
+
+@{
+    ViewBag.Title = "Видалення не можливо";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+}
+
+<p>@Html.ActionLink("До списку", "Index", "Home")</p>
+<h2>Удаление невозможно</h2>
+@if (Model.Collections.Count > 0)
+{
+    <p style="color:Red">Спочатку удаліть колекції в цій категорії:</p>
+    <ul>
+    @foreach (var item in Model.Collections)
+    {
+        <li>@Html.ActionLink(item.Name, "GetByShortName", "Collection", new { shortname = item.ShortName }, null)</li>
+    }
+    </ul>
+}
+@if (Model.CategoryProducts.Count > 0)
+{
+    <p style="color:Red">Сначала удалите Товари из этой коллекции:</p>
+    
+    <ul>
+    @foreach (var item in Model.CategoryProducts)
+    {
+        <li>@Html.ActionLink(item.Product.Name, "GetByShortName", "Product", new { shortname = item.Product.ShortName }, null)</li>
+    }
+    </ul>
+}

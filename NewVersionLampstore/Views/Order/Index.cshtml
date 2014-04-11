@@ -1,0 +1,30 @@
+﻿@model IEnumerable<NewVersionLampstore.Models.Order>
+
+@{
+    ViewBag.Title = string.Format("Заказы | {0}", NewVersionLampstore.Constants.TITLE);
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    
+}
+
+<p>
+    @Html.ActionLink("На головну", "Index", "Admin")
+    @NewVersionLampstore.Constants.BREADCRUMBS_SEPARATOR
+    Заказы
+</p>
+
+<h2>Заказы</h2>
+
+<table>
+@foreach (var item in Model.ToList())
+{
+    <tr>
+        <td>@Html.ActionLink(item.Date.ToString(), "Details", new { id = item.ID, page = Request.QueryString["page"] })</td>
+        
+        <td>@item.OrderItems.Select(orderItem => orderItem.Price * orderItem.Number).Sum() грн.</td>
+        <td>@item.OrderStatus</td>
+        
+    </tr>
+}
+</table>
+
+<br /><br />

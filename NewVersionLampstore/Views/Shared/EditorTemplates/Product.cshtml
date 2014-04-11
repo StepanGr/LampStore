@@ -1,0 +1,73 @@
+﻿@model NewVersionLampstore.Models.Product
+
+@Html.ValidationSummary()
+
+@Html.LabelFor(model => model.Name)
+<br />
+@Html.EditorFor(model => model.Name)
+<span style="color:Red">@Html.ValidationMessageFor(model => model.Name)</span>
+<br /><br />
+
+@Html.LabelFor(model => model.ShortName)
+<br />
+@Html.EditorFor(model => model.ShortName)
+<span style="color:Red">@Html.ValidationMessageFor(model => model.ShortName)</span>
+<br /><br />
+
+@Html.LabelFor(model => model.Price)
+<br />
+@Html.EditorFor(model => model.Price)
+<span style="color:Red">@Html.ValidationMessageFor(model => model.Price)</span>
+<br /><br />
+
+@Html.LabelFor(model => model.ManufacturerID)
+<br />
+@{
+    var queryManufacturers = (new NewVersionLampstore.Service.ManufacturerEntityService()).Get().Select(item => new { ID = item.ID, Name = item.Name }).ToList();
+    var listManufacturers = queryManufacturers.Select(item => new SelectListItem() { Text = item.Name, Value = item.ID.ToString(), Selected = (Model != null && Model.ManufacturerID == item.ID) }).ToList();
+    @Html.DropDownListFor(model => model.ManufacturerID, listManufacturers, "...")
+}
+<span style="color:Red">@Html.ValidationMessageFor(model => model.ManufacturerID)</span>
+<br /><br />
+
+@Html.LabelFor(model => model.Description)
+<br />
+@Html.TextAreaFor(model => model.Description, new { cols = 70, rows = 5 })
+<span style="color:Red">@Html.ValidationMessageFor(model => model.Description)</span>
+<br /><br />
+
+@Html.LabelFor(model => model.height)
+<br />
+@Html.EditorFor(model => model.height)
+<span style="color:Red">@Html.ValidationMessageFor(model => model.height)</span>
+<br /><br />
+
+@Html.LabelFor(model => model.width)
+<br />
+@Html.EditorFor(model => model.width)
+<span style="color:Red">@Html.ValidationMessageFor(model => model.width)</span>
+<br /><br />
+
+@Html.LabelFor(model => model.QuantytiLamp)
+<br />
+@Html.EditorFor(model => model.QuantytiLamp)
+<span style="color:Red">@Html.ValidationMessageFor(model => model.QuantytiLamp)</span>
+<br /><br />
+
+@Html.LabelFor(model => model.MaxWatt)
+<br />
+@Html.EditorFor(model => model.MaxWatt)
+<span style="color:Red">@Html.ValidationMessageFor(model => model.MaxWatt)</span>
+<br /><br />
+
+@Html.LabelFor(model => model.cap)
+<br />
+@Html.EditorFor(model => model.cap)
+<span style="color:Red">@Html.ValidationMessageFor(model => model.cap)</span>
+<br /><br />
+
+@Html.LabelFor(model => model.Color)
+<br />
+@Html.EditorFor(model => model.cap)
+<span style="color:Red">@Html.ValidationMessageFor(model => model.Color)</span>
+<br /><br />

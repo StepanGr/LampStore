@@ -1,0 +1,109 @@
+﻿@model NewVersionLampstore.Models.Manufacturer
+
+@{
+    ViewBag.Title = string.Format("{0} | Виробники| {1}", Model.Name, NewVersionLampstore.Constants.TITLE);
+    string ShortName = Model.ShortName;
+        
+}
+<script type="text/javascript">
+var shortName="."+ @(Html.RenderJsToScriptBlock(ShortName))
+$(shortName).css("background", "yellow")
+</script>
+@using NewVersionLampstore.Helper;
+<p id="breadcrumbs">
+    @Html.ActionLink("На головну", "Index", "Home")
+    @NewVersionLampstore.Constants.BREADCRUMBS_SEPARATOR
+        @Model.Name
+</p>
+<div id="Manufacturer_info">
+<h3>@Model.Name</h3>
+@Model.Description
+</div>
+
+<div id="Sort">
+Сортувати 
+<select id="Sort_form">
+<option value="Ціна:від меньшої до більшої">Ціна:від меньшої до більшої</option>
+<option value="Ціна:від більшої до меньшої">Ціна:від більшої до меньшої</option>
+<option value="Новинки">Новинки</option>
+</select>
+</div>
+
+<div id="Per_page">
+На сторінці
+<select id="Per_form">
+<option value="8">8</option>
+<option value="16">6</option>
+<option value="24">24</option>
+</select>
+</div>
+
+<h2>Товары</h2>
+@functions
+{
+    
+    public string RowProducts(ref int index, IEnumerable<NewVersionLampstore.Models.Product> prod)
+    {
+        string strResult = "<tr>";
+
+        for (int innerIndex = 0; innerIndex < NewVersionLampstore.Constants.PRODUCT_NUMBER_IN_ROW; innerIndex++)
+        {
+            strResult += "<td align=center valign=top class=ProductId>";
+
+            if (index < Model.Products.Count())
+            {
+                var obj = prod.Skip(index).Take(1).First();
+                string strImage = "0.jpg";
+                if (!string.IsNullOrWhiteSpace(obj.ImageExt)) { strImage = obj.ID.ToString() + obj.ImageExt.TrimEnd() + "?" + DateTime.Now.ToString(); }
+                strResult += "<table align=center cellpadding=5 class=ProductTable>" + "<tr class=ProductTr>" + "<td class=ProductImage>";
+                strResult += string.Format("<a href='{0}'><img src='{1}/{2}/{3}/{4}' alt='{5}' /></a>", Url.Action("GetProductInCategory", "Product", new { category = Model.ShortName, product = obj.ShortName }), Url.Content("~/Content"), NewVersionLampstore.Constants.PRODUCT_IMAGES_FOLDER, NewVersionLampstore.Constants.PRODUCT_IMAGES_MINI_FOLDER, strImage, obj.Name);
+                strResult += "</td>"; 
+                
+                strResult += "<td class=ProductInform>";
+                strResult += "<div class=g-price><div class=g-price-uah>";
+                strResult += obj.Price + "<span> грн " + "</span></div></div>";
+                string name = obj.Manufacturer.Name + " " + obj.Name;
+                strResult += "<div class=NameProduct>" + Html.ActionLink(name, "GetProductInCatogoryInManufacturer", "Product", new { category = Model.ShortName, manufacturer = obj.Manufacturer.ShortName, product = obj.ShortName }, null) + "</div>";
+
+                strResult += "<br/>" + "Висота" + "<span class=value>" + obj.height + "</span>";
+                strResult += "<br/>" + "Ширина" + "<span class=value>" + obj.width + "</span>";
+                strResult += "<br/>" + "Кількість ламп" + "<span class=value>" + obj.QuantytiLamp + "</span>";
+                strResult += "<br/>" + "Тип патрона" + "<span class=value>" + obj.cap + "</span>";
+                strResult += "<br/>" + "Максимальна потужність" + "<span class=value>" + obj.MaxWatt + "</span>";
+                strResult += "<br/>" + "Колір" + "<span class=value>" + obj.Color + "</span>";
+
+                strResult += "" + @Html.ActionLink("В корзину", "Add", "Cart", new { id = obj.ID }, new { @class = "add-cart" });
+                strResult += "</td>" + "</tr>" + "</table>";
+               
+            }
+
+            strResult += "</td>";
+
+            index = index + 1;
+        }
+
+        strResult += "</tr>";
+
+        return strResult;
+    }
+}
+<table id ="ProductTables" width="100%" border="0" cellpadding="5" >
+@{
+   
+    int page = 1;
+    if(Request.QueryString["page"] != null) { page = int.Parse(Request.QueryString["page"]); }
+    if(page < 1) { page = 1; }
+    
+    var pr = Model.Products.Skip((page - 1) * NewVersionLampstore.Constants.PAGER_LINKS_PER_PAGE).Take(NewVersionLampstore.Constants.PAGER_LINKS_PER_PAGE);
+    int iCategoryProductsCount = pr.Count();
+    int iCategoryProductIndex = 0;
+    while (iCategoryProductIndex < iCategoryProductsCount)
+    {
+        @MvcHtmlString.Create(RowProducts(ref iCategoryProductIndex, pr));
+    }
+}
+</table>
+
+<div class="pager">
+    @Html.Partial("_Pager", (new NewVersionLampstore.Pager(Request.QueryString["page"], Model.Products.Count, Request.QueryString)).links)
+</div>

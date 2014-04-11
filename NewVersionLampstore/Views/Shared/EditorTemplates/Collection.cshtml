@@ -1,0 +1,29 @@
+﻿@model NewVersionLampstore.Models.Collection
+           
+@Html.ValidationSummary()
+
+@Html.LabelFor(model => model.Name)
+<br />
+@Html.EditorFor(model => model.Name)
+<span style="color:Red">@Html.ValidationMessageFor(model => model.Name)</span>
+<br /><br />
+
+@Html.LabelFor(model => model.ShortName)
+<br />
+@Html.EditorFor(model => model.ShortName)
+<span style="color:Red">@Html.ValidationMessageFor(model => model.ShortName)</span>
+<br /><br />
+
+@Html.LabelFor(model => model.CategoryID)
+<br />
+@{
+    var queryCategories = (new NewVersionLampstore.Service.CategoryEntityService()).Get().Select(item => new { ID = item.ID, Name = item.Name }).ToList();
+    var listCategories = queryCategories.Select(item => new SelectListItem() { Text = item.Name, Value = item.ID.ToString(), Selected = (Model != null && Model.CategoryID == item.ID) }).ToList();
+    @Html.DropDownListFor(model => model.CategoryID, listCategories, "...")
+}
+<span style="color:Red">@Html.ValidationMessageFor(model => model.CategoryID)</span>
+<br /><br />
+
+@Html.TextAreaFor(model => model.Description, new { cols = 70, rows = 5 })
+<span style="color:Red">@Html.ValidationMessageFor(model => model.Description)</span>
+<br /><br />

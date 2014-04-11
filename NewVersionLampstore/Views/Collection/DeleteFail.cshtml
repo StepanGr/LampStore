@@ -1,0 +1,22 @@
+﻿@model NewVersionLampstore.Models.Collection
+
+@{
+    ViewBag.Title = "Удаление невозможно";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+}
+
+<p>@Html.ActionLink("К списку", "GetByShortName", "Category", new { shortname = Model.Category.ShortName }, null)</p>
+<h2>Удаление невозможно</h2>
+<span style="color:Red">Удаление невозможно</span>
+
+@if (Model.CollectionProducts.Count > 0)
+{
+    <p style="color:Red">Сначала удалите из этой коллекции Товари:</p>
+    <ul>
+    @foreach (var item in Model.CollectionProducts)
+    {
+        <li>@Html.ActionLink(item.Product.Name, "GetByShortName", "Product", new { shortname = item.Product.ShortName }, null)</li>
+    }
+    </ul>
+}

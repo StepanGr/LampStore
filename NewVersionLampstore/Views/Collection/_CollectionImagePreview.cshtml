@@ -1,0 +1,32 @@
+﻿@model IEnumerable<NewVersionLampstore.Models.CollectionImage>
+
+<table style="width:100%">
+<tr>
+<td style="width:100px;">
+@if(ViewBag.LeftArrow is int && ViewBag.LeftArrow > -1)
+{
+    @Ajax.ActionLink("<<Назад", "CollectionImagePreview", new { CollectionID = ViewBag.CollectionID, start = ViewBag.LeftArrow }, new AjaxOptions { UpdateTargetId = "CollectionImagePreview" })
+}
+</td>
+@foreach (var item in Model)
+{
+    <td>
+        <a href="#" onclick="document.CollectionImageForm.CollectionImageID.value=@(item.ID); document.CollectionImageForm.CollectionImageFormSubmit.click(); return false;">
+            <img src="@(Url.Content("~/Content"))/@(NewVersionLampstore.Constants.COLLECTION_IMAGE_FOLDER)/@(NewVersionLampstore.Constants.COLLECTION_IMAGE_PREVIEW_FOLDER)/@item.ID@item.ImageExt" alt="@item.ID" />
+        </a>
+    </td>
+}
+<td style="width:100px;">
+@if(ViewBag.LeftArrow is int && ViewBag.RightArrow > -1)
+{
+    @Ajax.ActionLink("Далее>>", "CollectionImagePreview", new { CollectionID = ViewBag.CollectionID, start = ViewBag.RightArrow }, new AjaxOptions { UpdateTargetId = "CollectionImagePreview" })
+}
+</td>
+</tr>
+</table>
+
+@using (Ajax.BeginForm("CollectionImage", null, new AjaxOptions { UpdateTargetId = "CollectionImage" }, new { name = "CollectionImageForm" }))
+{
+    @Html.Hidden("CollectionImageID", 0)
+    <input type="submit" name="CollectionImageFormSubmit" style="display:none" />
+}

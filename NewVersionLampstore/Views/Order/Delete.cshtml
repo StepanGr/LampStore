@@ -1,0 +1,17 @@
+﻿@model NewVersionLampstore.Models.Order
+
+@{
+    ViewBag.Title = string.Format("Видалення  | {0}", NewVersionLampstore.Constants.TITLE);
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h2 style="color:Red">Ви впевнені Що хочите Видалити цей товар?</h2>
+
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Видалити" />
+}
+
+<p style="font-weight:bold">@Model.Date</p>
+<p><span style="font-weight:bold">Замовник: </span>@Model.FirstName</p>

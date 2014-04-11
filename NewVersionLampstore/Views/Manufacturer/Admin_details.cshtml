@@ -1,0 +1,36 @@
+﻿@model NewVersionLampstore.Models.Manufacturer
+
+@{
+    ViewBag.Title = string.Format("{0} | Виробники| {1}", Model.Name, NewVersionLampstore.Constants.TITLE);
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<p id="breadcrumbs">
+    @Html.ActionLink("На головну", "Index", "Home")
+    @NewVersionLampstore.Constants.BREADCRUMBS_SEPARATOR
+    
+    @Model.Name
+</p>
+
+
+<p>@Html.ActionLink("Редагувати", "Edit", new { id = Model.ID })&nbsp;&nbsp;&nbsp;@Html.ActionLink("Видалити", "Delete", new { id = Model.ID })</p>
+
+<h2>@Model.Name</h2>
+<p>@Model.Description</p>
+
+<h2>Товари</h2>
+<ul>
+    @{
+    int page = 1;
+    if(Request.QueryString["page"] != null) { page = int.Parse(Request.QueryString["page"]); }
+    if(page < 1) { page = 1; }
+
+    foreach (var product in Model.Products.OrderByDescending(item => item.Sequence).Skip((page - 1) * NewVersionLampstore.Constants.PAGER_LINKS_PER_PAGE).Take(NewVersionLampstore.Constants.PAGER_LINKS_PER_PAGE))
+    {
+        <li>@Html.ActionLink(product.Name, "GetProductInManufacturer", "Product", new { manufacturer = Model.ShortName, product = product.ShortName, page = Request.QueryString["page"] }, null)</li>
+    }
+}
+</ul>
+<br/><br/>
+<div class="pager">
+    @Html.Partial("_Pager", (new NewVersionLampstore.Pager(Request.QueryString["page"], Model.Products.Count, Request.QueryString)).links)
+</div>

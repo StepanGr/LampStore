@@ -1,0 +1,48 @@
+﻿@model NewVersionLampstore.Models.ContentManager
+
+@{
+    ViewBag.Title = string.Format("Создание контент-менеджера | {0}", NewVersionLampstore.Constants.TITLE);
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+
+<p>@Html.ActionLink("Отмена", "Index")</p>
+
+<h2>Создание контент-менеджера</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm())
+{
+    <span style="color:Red">@ViewBag.ErrorMessage</span>
+    <span style="color:Red">@Html.ValidationSummary()</span>
+    
+    @Html.LabelFor(model => model.Login)
+    <br />
+    @Html.EditorFor(model => model.Login)
+    <span style="color:Red">@Html.ValidationMessageFor(model => model.Login)</span>
+    <br /><br />
+    
+    @Html.LabelFor(model => model.Password)
+    <br />
+    @Html.EditorFor(model => model.Password)
+    <span style="color:Red">@Html.ValidationMessageFor(model => model.Password)</span>
+    <br /><br />
+    
+    @Html.LabelFor(model => model.Repeat)
+    <br />
+    @Html.EditorFor(model => model.Repeat)
+    <span style="color:Red">@Html.ValidationMessageFor(model => model.Repeat)</span>
+    <br /><br />
+    
+    @Html.LabelFor(model => model.FirstName)
+    <br />
+    @Html.EditorFor(model => model.FirstName)
+    <span style="color:Red">@Html.ValidationMessageFor(model => model.FirstName)</span>
+    <br /><br />
+    
+    
+    
+    <input type="submit" value="Создать" />
+}
