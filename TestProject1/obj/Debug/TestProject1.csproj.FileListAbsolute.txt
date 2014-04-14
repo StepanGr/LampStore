@@ -8,3 +8,8 @@ D:\Dropbox\LampStore (1)\TestLampstore\TestVersionLampstore\TestProject1\bin\Deb
 D:\Dropbox\LampStore (1)\TestLampstore\TestVersionLampstore\TestProject1\obj\Debug\TestProject1.csprojResolveAssemblyReference.cache
 D:\Dropbox\LampStore (1)\TestLampstore\TestVersionLampstore\TestProject1\obj\Debug\TestProject1.dll
 D:\Dropbox\LampStore (1)\TestLampstore\TestVersionLampstore\TestProject1\obj\Debug\TestProject1.pdb
+D:\LampStore\TestProject1\bin\Debug\TestProject1.dll
+D:\LampStore\TestProject1\bin\Debug\TestProject1.pdb
+D:\LampStore\TestProject1\obj\Debug\ResolveAssemblyReference.cache
+D:\LampStore\TestProject1\obj\Debug\TestProject1.dll
+D:\LampStore\TestProject1\obj\Debug\TestProject1.pdb

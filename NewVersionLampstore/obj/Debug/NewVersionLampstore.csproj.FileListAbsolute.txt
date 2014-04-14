@@ -50,3 +50,14 @@ D:\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\obj\
 D:\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\obj\Debug\NewVersionLampstore.pdb
 C:\Users\Spektr\Dropbox\LampStore\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\Glimpse.Core.dll
 D:\Dropbox\LampStore (1)\TestLampstore\TestVersionLampstore\NewVersionLampstore\bin\Glimpse.Core.dll
+D:\LampStore\NewVersionLampstore\bin\NewVersionLampstore.dll
+D:\LampStore\NewVersionLampstore\bin\NewVersionLampstore.pdb
+D:\LampStore\NewVersionLampstore\bin\EntityFramework.dll
+D:\LampStore\NewVersionLampstore\bin\Glimpse.Core.dll
+D:\LampStore\NewVersionLampstore\bin\Ninject.dll
+D:\LampStore\NewVersionLampstore\bin\EntityFramework.xml
+D:\LampStore\NewVersionLampstore\bin\Ninject.pdb
+D:\LampStore\NewVersionLampstore\bin\Ninject.xml
+D:\LampStore\NewVersionLampstore\obj\Debug\ResolveAssemblyReference.cache
+D:\LampStore\NewVersionLampstore\obj\Debug\NewVersionLampstore.dll
+D:\LampStore\NewVersionLampstore\obj\Debug\NewVersionLampstore.pdb
