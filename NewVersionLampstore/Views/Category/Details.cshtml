@@ -85,12 +85,7 @@
     int page = 1;
     if(Request.QueryString["page"] != null) { page = int.Parse(Request.QueryString["page"]); }
     if(page < 1) { page = 1; }
-    List<NewVersionLampstore.Models.Product> products = new List<NewVersionLampstore.Models.Product>();
-    foreach(var prod in Model.CategoryProducts)
-    {
-        products.Add(prod.Product);
-        
-    }
+    IEnumerable<NewVersionLampstore.Models.Product> products = Model.CategoryProducts.OrderByDescending(q => q.Sequence).Select(item => item.Product);
     var pr = products.Skip((page - 1) * NewVersionLampstore.Constants.PAGER_LINKS_PER_PAGE).Take(NewVersionLampstore.Constants.PAGER_LINKS_PER_PAGE);
     int iCategoryProductsCount = pr.Count();
     int iCategoryProductIndex = 0;

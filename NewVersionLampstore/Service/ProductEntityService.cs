@@ -13,10 +13,12 @@ namespace NewVersionLampstore.Service
 
         protected override System.Data.Objects.ObjectSet<Product> EntitySet { get { return entities.Products; } }
 
-        public override IQueryable<Product> Get(System.Collections.Specialized.NameValueCollection filter)
+
+        public override IQueryable<Product> Get(System.Collections.Specialized.NameValueCollection filter, FilterData FilterCat)
         {
             IQueryable<Product> result = Get();
-
+            
+            
             if (!string.IsNullOrWhiteSpace(filter["find"]))
             {
                 string strFind = filter["find"].ToLower();
@@ -25,11 +27,12 @@ namespace NewVersionLampstore.Service
             if (!string.IsNullOrWhiteSpace(filter["quantitylamps"]))
             {
                 
-
+                Category cat = new CategoryEntityService().Get(FilterCat.Category);
                 string strFind = filter["quantitylamps"];
+                 var res = cat.CategoryProducts.OrderByDescending(item => item.Sequence).Select(item=>item.Product);
                 int quan=Convert.ToInt32(strFind);
                 
-                result = result.Where(item => item.QuantytiLamp == quan);
+                result = res.Where(item => item.QuantytiLamp == quan).AsQueryable();
                 
             }
             return result;

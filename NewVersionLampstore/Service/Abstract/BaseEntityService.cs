@@ -6,6 +6,7 @@ using System.Data.Objects;
 using NewVersionLampstore.Models.Interfaces;
 using NewVersionLampstore.Service.Interface;
 using System.Collections.Specialized;
+using NewVersionLampstore.Models;
 
 namespace NewVersionLampstore.Service.Abstract
 {
@@ -19,12 +20,18 @@ namespace NewVersionLampstore.Service.Abstract
         {
             return from obj in EntitySet select obj;
         }
-        // Получение списка выбранных объектов
         public virtual IQueryable<T> Get(NameValueCollection filter)
         {
             return Get();
         }
 
+        // Получение списка выбранных объектов
+        public virtual IQueryable<T> Get(NameValueCollection filter, FilterData FilterCat)
+        {
+            return Get();
+        }
+
+        
         // Получение количества всех объектов
         public virtual int Count()
         {
@@ -56,7 +63,10 @@ namespace NewVersionLampstore.Service.Abstract
         {
             return Get(filter).Skip(skip).Take(take);
         }
-
+        public virtual IQueryable<T> Get(NameValueCollection filter,FilterData FilterCat, int skip, int take)
+        {
+            return Get(filter,FilterCat).Skip(skip).Take(take);
+        }
         // Добавление объекта
         public virtual void Create(T dataObject)
         {

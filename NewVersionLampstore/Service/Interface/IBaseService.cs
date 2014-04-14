@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using NewVersionLampstore.Models.Interfaces;
 using System.Collections.Specialized;
+using NewVersionLampstore.Models;
 
 namespace NewVersionLampstore.Service.Interface
 {
@@ -13,6 +14,8 @@ namespace NewVersionLampstore.Service.Interface
         IQueryable<T> Get();
         // Получение выбранных записей
         IQueryable<T> Get(NameValueCollection filter);
+
+        
 
         // Получение количества всех записей
         int Count();
@@ -29,6 +32,8 @@ namespace NewVersionLampstore.Service.Interface
 
         // Получение нескольких выбранных записей
         IQueryable<T> Get(NameValueCollection filter, int skip, int take);
+
+        IQueryable<T> Get(NameValueCollection filter,FilterData FilterCat, int skip, int take);
 
         // Добавление записи в таблицу
         void Create(T dataObject);

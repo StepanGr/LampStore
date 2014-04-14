@@ -33,9 +33,14 @@ namespace NewVersionLampstore.Controllers.Abstract
                 {
                     int page = 1;
                     if (Request.QueryString["page"] != null) page = int.Parse(Request.QueryString["page"]);
-                    if (page < 1) page = 1;
-
-                    objs = service.Get(Request.QueryString, (page - 1) * Constants.PAGER_LINKS_PER_PAGE, Constants.PAGER_LINKS_PER_PAGE);
+                    if (page < 1) page = 1;                   
+                    if (Filter != null)
+                    {
+                        objs = service.Get(Request.QueryString,Filter, (page - 1) * Constants.PAGER_LINKS_PER_PAGE, Constants.PAGER_LINKS_PER_PAGE);
+ 
+                    }
+                    else
+                        objs = service.Get(Request.QueryString, (page - 1) * Constants.PAGER_LINKS_PER_PAGE, Constants.PAGER_LINKS_PER_PAGE);
                 }
                  else objs = service.Get(Request.QueryString);
                 if (User.IsInRole(NewVersionLampstore.Constants.ROLE_ADMIN))
@@ -44,6 +49,7 @@ namespace NewVersionLampstore.Controllers.Abstract
             }
             else
             {
+                
                 T obj = service.Get(shortName);
                 if (obj == null) return View("NotFound");
                 if (User.IsInRole(NewVersionLampstore.Constants.ROLE_ADMIN))                    
