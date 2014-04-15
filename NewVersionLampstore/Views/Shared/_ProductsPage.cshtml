@@ -33,7 +33,7 @@
 
 
 <div id="Search" style="position: absolute;top:0px;left:48%;z-index:1;">
-@using (Html.BeginForm("GetByShortName", "Product", new { shortname = string.Empty }, FormMethod.Get, null))
+@using (Html.BeginForm("GetByShortName", "Product", new { shortname = string.Empty, FilterCat=0}, FormMethod.Get, null))
 {
      @Html.TextBox("find", Request.QueryString["find"], new { @class="TextBoxSearch"})
     <input type="submit" title="Шукати" value=" " class="SearchButton" />
