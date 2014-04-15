@@ -69,6 +69,17 @@
 
 <table id ="ProductTables" width="100%" border="0" cellpadding="5" >
 @{
+    int page=0;
+    
+    if(ViewBag.CurrentCategory!=null)
+    {
+     page = new NewVersionLampstore.Service.ProductEntityService().Count(Request.QueryString,(NewVersionLampstore.Models.FilterData)ViewBag.CurrentCategory);
+    }
+    else
+    {
+        page = new NewVersionLampstore.Service.ProductEntityService().Count(Request.QueryString);
+    }
+        
     int iProductCount = Model.Count();
     int iProductIndex = 0;
     
@@ -83,5 +94,5 @@
 
 <div class="pager">
     
-    @Html.Partial("_Pager", new NewVersionLampstore.Pager(Request.QueryString["page"], new NewVersionLampstore.Service.ProductEntityService().Count(Request.QueryString), Request.QueryString).links)
+    @Html.Partial("_Pager", new NewVersionLampstore.Pager(Request.QueryString["page"], page, Request.QueryString).links)
 </div>

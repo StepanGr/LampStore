@@ -16,13 +16,13 @@ namespace NewVersionLampstore.Controllers.Abstract
         public UrlFriendlyController(S _service) : base(_service) { }
 
         // Отображение объекта с указанным ShortName
-        public ActionResult GetByShortName(string shortName, FilterData Filter)
+        public ActionResult GetByShortName(string shortName, FilterData FilterCat)
         {
             
             if (typeof(T) == typeof(Category))
             {
-                Filter.Category = shortName;
-                Session[NewVersionLampstore.Constants.SESSION_FILTER] = Filter;
+                FilterCat.Category = shortName;
+                Session[NewVersionLampstore.Constants.SESSION_FILTER] = FilterCat;
             }
             
             if (string.IsNullOrWhiteSpace(shortName))
@@ -34,9 +34,10 @@ namespace NewVersionLampstore.Controllers.Abstract
                     int page = 1;
                     if (Request.QueryString["page"] != null) page = int.Parse(Request.QueryString["page"]);
                     if (page < 1) page = 1;                   
-                    if (Filter != null)
+                    if (FilterCat != null)
                     {
-                        objs = service.Get(Request.QueryString,Filter, (page - 1) * Constants.PAGER_LINKS_PER_PAGE, Constants.PAGER_LINKS_PER_PAGE);
+                        objs = service.Get(Request.QueryString,FilterCat, (page - 1) * Constants.PAGER_LINKS_PER_PAGE, Constants.PAGER_LINKS_PER_PAGE);
+                        ViewBag.CurrentCategory = FilterCat;
  
                     }
                     else

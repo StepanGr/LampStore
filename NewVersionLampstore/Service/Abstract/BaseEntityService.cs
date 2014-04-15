@@ -44,6 +44,11 @@ namespace NewVersionLampstore.Service.Abstract
             return Get(filter).Count();
         }
 
+        public virtual int Count(NameValueCollection filter, FilterData FilterCat)
+        {
+            return Get(filter,FilterCat).Count();
+        }
+
         // Получение объекта по его ID
         public virtual T Get(int id)
         {
